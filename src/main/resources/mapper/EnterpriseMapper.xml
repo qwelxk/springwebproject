@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.EnterpriseMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Enterprise">
+    <id column="enterprise_id" jdbcType="INTEGER" property="enterpriseId" />
+    <result column="enterprise_password" jdbcType="VARCHAR" property="enterprisePassword" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="enterprise_address" jdbcType="VARCHAR" property="enterpriseAddress" />
+    <result column="enterprise_info" jdbcType="VARCHAR" property="enterpriseInfo" />
+    <result column="enterpris_email" jdbcType="VARCHAR" property="enterprisEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    enterprise_id, enterprise_password, enterprise_name, enterprise_address, enterprise_info, 
+    enterpris_email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Enterprise">
+    insert into enterprise (enterprise_id, enterprise_password, 
+      enterprise_name, enterprise_address, enterprise_info, 
+      enterpris_email)
+    values (#{enterpriseId,jdbcType=INTEGER}, #{enterprisePassword,jdbcType=VARCHAR}, 
+      #{enterpriseName,jdbcType=VARCHAR}, #{enterpriseAddress,jdbcType=VARCHAR}, #{enterpriseInfo,jdbcType=VARCHAR}, 
+      #{enterprisEmail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Enterprise">
+    insert into enterprise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="enterprisePassword != null">
+        enterprise_password,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="enterpriseAddress != null">
+        enterprise_address,
+      </if>
+      <if test="enterpriseInfo != null">
+        enterprise_info,
+      </if>
+      <if test="enterprisEmail != null">
+        enterpris_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=INTEGER},
+      </if>
+      <if test="enterprisePassword != null">
+        #{enterprisePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null">
+        #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseInfo != null">
+        #{enterpriseInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisEmail != null">
+        #{enterprisEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Enterprise">
+    update enterprise
+    <set>
+      <if test="enterprisePassword != null">
+        enterprise_password = #{enterprisePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null">
+        enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseInfo != null">
+        enterprise_info = #{enterpriseInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisEmail != null">
+        enterpris_email = #{enterprisEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Enterprise">
+    update enterprise
+    set enterprise_password = #{enterprisePassword,jdbcType=VARCHAR},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      enterprise_info = #{enterpriseInfo,jdbcType=VARCHAR},
+      enterpris_email = #{enterprisEmail,jdbcType=VARCHAR}
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

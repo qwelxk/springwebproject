@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.StudentInternshipMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.StudentInternship">
+    <id column="st_name" jdbcType="VARCHAR" property="stName" />
+    <id column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    st_name, enterprise_name, position
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.example.demo.model.StudentInternshipKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student_internship
+    where st_name = #{stName,jdbcType=VARCHAR}
+      and enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.demo.model.StudentInternshipKey">
+    delete from student_internship
+    where st_name = #{stName,jdbcType=VARCHAR}
+      and enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.StudentInternship">
+    insert into student_internship (st_name, enterprise_name, position
+      )
+    values (#{stName,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.StudentInternship">
+    insert into student_internship
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stName != null">
+        st_name,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stName != null">
+        #{stName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.StudentInternship">
+    update student_internship
+    <set>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where st_name = #{stName,jdbcType=VARCHAR}
+      and enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.StudentInternship">
+    update student_internship
+    set position = #{position,jdbcType=VARCHAR}
+    where st_name = #{stName,jdbcType=VARCHAR}
+      and enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+  </update>
+</mapper>

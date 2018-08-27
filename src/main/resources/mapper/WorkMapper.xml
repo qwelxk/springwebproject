@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.WorkMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Work">
+    <result column="work_introduce" jdbcType="VARCHAR" property="workIntroduce" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="min_money" jdbcType="VARCHAR" property="minMoney" />
+    <result column="max_money" jdbcType="VARCHAR" property="maxMoney" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="experience" jdbcType="VARCHAR" property="experience" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.model.Work">
+    insert into work (work_introduce, enterprise_name, label, 
+      min_money, max_money, address, 
+      experience, education)
+    values (#{workIntroduce,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{minMoney,jdbcType=VARCHAR}, #{maxMoney,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{experience,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Work">
+    insert into work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workIntroduce != null">
+        work_introduce,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="minMoney != null">
+        min_money,
+      </if>
+      <if test="maxMoney != null">
+        max_money,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="experience != null">
+        experience,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workIntroduce != null">
+        #{workIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null">
+        #{minMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="maxMoney != null">
+        #{maxMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Student">
+    <id column="st_id" jdbcType="INTEGER" property="stId" />
+    <result column="st_name" jdbcType="VARCHAR" property="stName" />
+    <result column="st_sex" jdbcType="VARCHAR" property="stSex" />
+    <result column="st_age" jdbcType="VARCHAR" property="stAge" />
+    <result column="st_tel" jdbcType="VARCHAR" property="stTel" />
+    <result column="st_dept" jdbcType="VARCHAR" property="stDept" />
+    <result column="st_address" jdbcType="VARCHAR" property="stAddress" />
+    <result column="search_job_info" jdbcType="VARCHAR" property="searchJobInfo" />
+    <result column="st_password" jdbcType="VARCHAR" property="stPassword" />
+    <result column="st_experience" jdbcType="VARCHAR" property="stExperience" />
+    <result column="st_email" jdbcType="VARCHAR" property="stEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    st_id, st_name, st_sex, st_age, st_tel, st_dept, st_address, search_job_info, st_password, 
+    st_experience, st_email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where st_id = #{stId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where st_id = #{stId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Student">
+    insert into student (st_id, st_name, st_sex, 
+      st_age, st_tel, st_dept, 
+      st_address, search_job_info, st_password, 
+      st_experience, st_email)
+    values (#{stId,jdbcType=INTEGER}, #{stName,jdbcType=VARCHAR}, #{stSex,jdbcType=VARCHAR}, 
+      #{stAge,jdbcType=VARCHAR}, #{stTel,jdbcType=VARCHAR}, #{stDept,jdbcType=VARCHAR}, 
+      #{stAddress,jdbcType=VARCHAR}, #{searchJobInfo,jdbcType=VARCHAR}, #{stPassword,jdbcType=VARCHAR}, 
+      #{stExperience,jdbcType=VARCHAR}, #{stEmail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stId != null">
+        st_id,
+      </if>
+      <if test="stName != null">
+        st_name,
+      </if>
+      <if test="stSex != null">
+        st_sex,
+      </if>
+      <if test="stAge != null">
+        st_age,
+      </if>
+      <if test="stTel != null">
+        st_tel,
+      </if>
+      <if test="stDept != null">
+        st_dept,
+      </if>
+      <if test="stAddress != null">
+        st_address,
+      </if>
+      <if test="searchJobInfo != null">
+        search_job_info,
+      </if>
+      <if test="stPassword != null">
+        st_password,
+      </if>
+      <if test="stExperience != null">
+        st_experience,
+      </if>
+      <if test="stEmail != null">
+        st_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stId != null">
+        #{stId,jdbcType=INTEGER},
+      </if>
+      <if test="stName != null">
+        #{stName,jdbcType=VARCHAR},
+      </if>
+      <if test="stSex != null">
+        #{stSex,jdbcType=VARCHAR},
+      </if>
+      <if test="stAge != null">
+        #{stAge,jdbcType=VARCHAR},
+      </if>
+      <if test="stTel != null">
+        #{stTel,jdbcType=VARCHAR},
+      </if>
+      <if test="stDept != null">
+        #{stDept,jdbcType=VARCHAR},
+      </if>
+      <if test="stAddress != null">
+        #{stAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="searchJobInfo != null">
+        #{searchJobInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="stPassword != null">
+        #{stPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="stExperience != null">
+        #{stExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="stEmail != null">
+        #{stEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Student">
+    update student
+    <set>
+      <if test="stName != null">
+        st_name = #{stName,jdbcType=VARCHAR},
+      </if>
+      <if test="stSex != null">
+        st_sex = #{stSex,jdbcType=VARCHAR},
+      </if>
+      <if test="stAge != null">
+        st_age = #{stAge,jdbcType=VARCHAR},
+      </if>
+      <if test="stTel != null">
+        st_tel = #{stTel,jdbcType=VARCHAR},
+      </if>
+      <if test="stDept != null">
+        st_dept = #{stDept,jdbcType=VARCHAR},
+      </if>
+      <if test="stAddress != null">
+        st_address = #{stAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="searchJobInfo != null">
+        search_job_info = #{searchJobInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="stPassword != null">
+        st_password = #{stPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="stExperience != null">
+        st_experience = #{stExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="stEmail != null">
+        st_email = #{stEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where st_id = #{stId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Student">
+    update student
+    set st_name = #{stName,jdbcType=VARCHAR},
+      st_sex = #{stSex,jdbcType=VARCHAR},
+      st_age = #{stAge,jdbcType=VARCHAR},
+      st_tel = #{stTel,jdbcType=VARCHAR},
+      st_dept = #{stDept,jdbcType=VARCHAR},
+      st_address = #{stAddress,jdbcType=VARCHAR},
+      search_job_info = #{searchJobInfo,jdbcType=VARCHAR},
+      st_password = #{stPassword,jdbcType=VARCHAR},
+      st_experience = #{stExperience,jdbcType=VARCHAR},
+      st_email = #{stEmail,jdbcType=VARCHAR}
+    where st_id = #{stId,jdbcType=INTEGER}
+  </update>
+</mapper>

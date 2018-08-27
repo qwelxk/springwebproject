@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ChapterMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Chapter">
+    <id column="chapter_id" jdbcType="INTEGER" property="chapterId" />
+    <result column="chapter_name" jdbcType="VARCHAR" property="chapterName" />
+    <result column="chapter_manager" jdbcType="VARCHAR" property="chapterManager" />
+    <result column="chapter_check" jdbcType="VARCHAR" property="chapterCheck" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    chapter_id, chapter_name, chapter_manager, chapter_check
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chapter
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByName" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from chapter
+    where chapter_name = #{chapterName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chapter
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Chapter">
+    insert into chapter (chapter_id, chapter_name, chapter_manager, 
+      chapter_check)
+    values (#{chapterId,jdbcType=INTEGER}, #{chapterName,jdbcType=VARCHAR}, #{chapterManager,jdbcType=VARCHAR}, 
+      #{chapterCheck,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Chapter">
+    insert into chapter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chapterId != null">
+        chapter_id,
+      </if>
+      <if test="chapterName != null">
+        chapter_name,
+      </if>
+      <if test="chapterManager != null">
+        chapter_manager,
+      </if>
+      <if test="chapterCheck != null">
+        chapter_check,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chapterId != null">
+        #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterName != null">
+        #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterManager != null">
+        #{chapterManager,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterCheck != null">
+        #{chapterCheck,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Chapter">
+    update chapter
+    <set>
+      <if test="chapterName != null">
+        chapter_name = #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterManager != null">
+        chapter_manager = #{chapterManager,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterCheck != null">
+        chapter_check = #{chapterCheck,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Chapter">
+    update chapter
+    set chapter_name = #{chapterName,jdbcType=VARCHAR},
+      chapter_manager = #{chapterManager,jdbcType=VARCHAR},
+      chapter_check = #{chapterCheck,jdbcType=VARCHAR}
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </update>
+</mapper>
